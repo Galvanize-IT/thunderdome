@@ -1,0 +1,31 @@
+{
+  "name": "less-playground",
+  "version": "1.0.0",
+  "description": "A live-reload environment for Less",
+  "main": "index.html",
+  "scripts": {
+    "start": "gulp"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Galvanize-IT/less-playground.git"
+  },
+  "keywords": [
+    "Less",
+    "LiveReload",
+    "CSS",
+    "gulp"
+  ],
+  "author": "Galvanize Product <dev@galvanize.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Galvanize-IT/less-playground/issues"
+  },
+  "homepage": "https://github.com/Galvanize-IT/less-playground",
+  "devDependencies": {
+    "bootstrap": "^3.3.4",
+    "gulp": "^3.8.11",
+    "gulp-less": "^3.0.3",
+    "gulp-live-server": "0.0.14"
+  }
+}
