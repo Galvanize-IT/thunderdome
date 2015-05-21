@@ -23,9 +23,13 @@
   },
   "homepage": "https://github.com/Galvanize-IT/less-playground",
   "devDependencies": {
-    "bootstrap": "^3.3.4",
     "gulp": "^3.8.11",
+    "gulp-concat": "^2.5.2",
     "gulp-less": "^3.0.3",
     "gulp-live-server": "0.0.14"
+  },
+  "dependencies": {
+    "bootstrap": "^3.3.4",
+    "jquery": "^2.1.4"
   }
 }
