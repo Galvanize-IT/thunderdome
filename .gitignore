@@ -26,5 +26,14 @@ build/Release
 # https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git
 node_modules
 
-# Dist
+# Static files
+static/*
+!static/img/
+
+# Production distribution
 /dist
+
+# Swap files
+*.swp
+*.swo
+*.swn

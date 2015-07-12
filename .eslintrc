@@ -1,0 +1,25 @@
+{
+  "parser": "babel-eslint",
+  "rules": {
+    "strict": 0,
+    "indent": [2, 2], // Indent 2 spaces
+    "quotes": [2, "single"],
+    "linebreak-style": [2, "unix"],
+    "semi": [2, "always"]
+  },
+  "env": {
+    "es6": true,
+    "browser": true
+  },
+  "ecmaFeatures": {
+    "jsx": true
+  },
+  "globals": {
+    "Backbone": false,
+    "$": false,
+    "_": false
+  },
+  "plugins": [
+    "react"
+  ]
+}
