@@ -8,14 +8,19 @@ var minifyCss = require('gulp-minify-css');
 var path = require('path');
 var proxy = require('express-http-proxy');
 var rename = require('gulp-rename');
+var replace = require('gulp-replace');
 var uglify = require('gulp-uglify');
 var webpack = require('gulp-webpack');
 var webpackConfig = require('./webpack.config.js');
+
+// Configuration
+// ----
 
 var PORT = 8080; // Port for development server
 var PROXY_ADDRESS = 'http://localhost:3000'; // Address for an example proxy
 var STATIC_DIR = './static'; // Destination directory for static assets
 var BUILD_DIR = './dist'; // Destination directory for production build
+var NOW = Date.now(); // Used for production timestamp
 
 // A reason to hate gulp: https://github.com/gulpjs/gulp/issues/259
 // Solution: http://stackoverflow.com/a/21678601
@@ -27,7 +32,7 @@ function handleError(err) {
 // DEPENDENCIES holds all javascript libraries that will be included in
 // lib.js instead of app.js
 // TODO Build non-min files in order to produce a map?
-// TODO require?
+// TODO use require?
 var DEPENDENCIES = [
   './node_modules/jquery/dist/jquery.min.js',
   './node_modules/bootstrap/dist/js/bootstrap.min.js',
@@ -48,17 +53,16 @@ gulp.task('lint', function () {
 // Development build tasks
 // ----
 
-gulp.task('lib', function() {
-  return gulp.src(DEPENDENCIES)
-    .pipe(concat('lib.js'))
-    .pipe(gulp.dest(path.join(STATIC_DIR, 'js')));
-});
-
 gulp.task('less', function() {
   return gulp.src('./src/less/app.less')
     .pipe(less().on('error', handleError))
     .pipe(gulp.dest(path.join(STATIC_DIR, 'css')))
     .pipe(livereload());
+});
+gulp.task('lib', function() {
+  return gulp.src(DEPENDENCIES)
+    .pipe(concat('lib.js'))
+    .pipe(gulp.dest(path.join(STATIC_DIR, 'js')));
 });
 
 gulp.task('app', function() {
@@ -105,49 +109,50 @@ gulp.task('watch', function() {
 // Production build tasks
 // ----
 
-gulp.task('production-less', function() {
+gulp.task('build-less', function() {
   return gulp.src('./src/less/app.less')
     .pipe(less().on('error', handleError))
     .pipe(minifyCss({compatibility: 'ie8'}))
-    // TODO inject github commit for cache-busting
+    .pipe(rename('app-' + NOW + '.css'))
     .pipe(gulp.dest(path.join(BUILD_DIR, STATIC_DIR, 'css')));
 });
 
-gulp.task('production-app', function() {
+gulp.task('build-lib', function() {
+  return gulp.src(DEPENDENCIES)
+    .pipe(concat('lib-' + NOW + '.js'))
+    .pipe(gulp.dest(path.join(BUILD_DIR, STATIC_DIR, 'js')));
+});
+
+gulp.task('build-app', function() {
   return gulp.src('./src/js/app.js')
     .pipe(webpack(webpackConfig).on('error', handleError))
-    // TODO inject github commit for cache-busting
-    .pipe(rename('app.js'))
+    .pipe(rename('app-' + NOW + '.js'))
     .pipe(uglify())
     .pipe(gulp.dest(path.join(BUILD_DIR, STATIC_DIR, 'js')));
 });
 
-gulp.task('production-img', function(){
+gulp.task('build-img', function(){
     // TODO inject github commit for cache-busting?
   return gulp.src(path.join(STATIC_DIR, 'img/*'))
     .pipe(gulp.dest(path.join(BUILD_DIR, STATIC_DIR, 'img')));
 });
 
-// production-html copies the index.html file to the build directory,
+// build-html copies the index.html file to the build directory,
 // while injecting the github commit for cache busting
-gulp.task('production-html', function(){
+gulp.task('build-html', function(){
   return gulp.src('./index.html')
-    // TODO inject github commit for cache-busting
+    .pipe(replace('app.css', 'app-' + NOW + '.css'))
+    .pipe(replace('lib.js', 'lib-' + NOW + '.js'))
+    .pipe(replace('app.js', 'app-' + NOW + '.js'))
     .pipe(gulp.dest(BUILD_DIR));
-});
-
-gulp.task('production-lib', function() {
-  return gulp.src(DEPENDENCIES)
-    .pipe(concat('lib.js'))
-    .pipe(gulp.dest(path.join(BUILD_DIR, STATIC_DIR, 'js')));
 });
 
 gulp.task('default', ['less', 'lib', 'app', 'watch']);
 
-gulp.task('production', [
-  'production-less',
-  'production-lib',
-  'production-app',
-  'production-img',
-  'production-html'
+gulp.task('build', [
+  'build-less',
+  'build-lib',
+  'build-app',
+  'build-img',
+  'build-html'
 ]);

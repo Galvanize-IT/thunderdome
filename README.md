@@ -1,8 +1,7 @@
 # Thunderdome
-Galvanize's client-side stack: Backbone/React with ES2015
+Galvanize's client-side stack:
 
-Includes:
-* [Backbone](http://backbonejs.org/) and [React](https://facebook.github.io/react/) written with ES2015 using the [Babel](https://babeljs.io/) transpiler
+* [Backbone](http://backbonejs.org/) and [React](https://facebook.github.io/react/) with ES2015 using the [Babel](https://babeljs.io/) transpiler
 * [Less](http://lesscss.org/) with CSS minification
 * Development and production build tasks with [Gulp](http://gulpjs.com/)
 * Linting with [ESLint](http://eslint.org/)
@@ -10,7 +9,7 @@ Includes:
 
 ### System Dependencies
 
-[Node.js](https://nodejs.org/) should be installed on your system. I recommend installing it with [nvm](https://github.com/creationix/nvm#installation).
+[Node.js](https://nodejs.org/) should be installed on your system. We recommend installing it with [nvm](https://github.com/creationix/nvm#installation).
 
 Once node is installed, make sure [Gulp](http://gulpjs.com/) is installed globally:
 
@@ -23,28 +22,31 @@ The playground can then be installed with:
 
     npm install
 
-And run with:
-
-    npm start
-
-Open `http://localhost:8080` in your browser.
-
-Start hacking on `index.html` and `src/app.less`
-
 
 ### Development
 
+Run the development environment with:
+
+    gulp
+
+A proxy server is built into the development environment. It can be configured in `gulpfile.js`.
+
+For live-reload functionality, install the [chrome extension](https://chrome.google.com/webstore/detail/livereload/jnihajbhpnppcggbcgedagnkighmdlei?hl=en).
+
+Linting can be run with:
+
+    gulp lint
 
 
 ### Production / Deployment
 
+A production build can be created with:
+
+    gulp build
+
+By default it will build to the `dist` directory. Files are timestamped to trigger cache-busting.
+
+The production directory can then be copied to the server / CDN.
 
 
-
-Multiple pages are currently not supported.
-
-[Sass](http://sass-lang.com/) has a watch built into its command line tool, unlike Less.
-
-Live reload also has a [number of options](https://github.com/livereload/livereload-js). Installing the [chrome extension](https://chrome.google.com/webstore/detail/livereload/jnihajbhpnppcggbcgedagnkighmdlei?hl=en) allows the `<script src="http://localhost:35729/livereload...` line to be removed from `index.html`.
-
-aodin, 2015
+Galvanize Product, 2015
