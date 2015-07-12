@@ -5,6 +5,7 @@ Galvanize's client-side stack:
 * [Less](http://lesscss.org/) with CSS minification
 * Development and production build tasks with [Gulp](http://gulpjs.com/)
 * Linting with [ESLint](http://eslint.org/)
+* Testing with [Mocha](http://mochajs.org/), [Chai](http://chaijs.com/), and [Sinon](http://sinonjs.org/) running on [Karma](http://karma-runner.github.io/)
 
 
 ### System Dependencies
@@ -18,7 +19,7 @@ Once node is installed, make sure [Gulp](http://gulpjs.com/) is installed global
 
 ### Installation
 
-The playground can then be installed with:
+Thunderdome can be installed with:
 
     npm install
 
@@ -32,6 +33,10 @@ Run the development environment with:
 A proxy server is built into the development environment. It can be configured in `gulpfile.js`.
 
 For live-reload functionality, install the [chrome extension](https://chrome.google.com/webstore/detail/livereload/jnihajbhpnppcggbcgedagnkighmdlei?hl=en).
+
+Testing can be run with:
+
+    npm test
 
 Linting can be run with:
 

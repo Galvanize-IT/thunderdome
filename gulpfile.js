@@ -41,6 +41,13 @@ var DEPENDENCIES = [
   './node_modules/react/dist/react.min.js'
 ];
 
+// Export the dependencies for testing
+module.exports = {
+  BUILD_DIR: BUILD_DIR,
+  STATIC_DIR: STATIC_DIR,
+  DEPENDENCIES: DEPENDENCIES
+};
+
 // Linting
 // ----
 gulp.task('lint', function () {

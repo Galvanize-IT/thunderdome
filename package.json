@@ -1,10 +1,11 @@
 {
   "name": "thunderdome",
   "version": "1.0.0",
-  "description": "A live-reload environment for Less",
+  "description": "Galvanize's client-side stack: Backbone/React with ES2015",
   "main": "index.html",
   "scripts": {
-    "start": "gulp"
+    "start": "gulp",
+    "test": "./node_modules/karma/bin/karma start ./test/karma.conf.js"
   },
   "repository": {
     "type": "git",
@@ -29,6 +30,7 @@
     "babel-core": "^5.6.18",
     "babel-eslint": "^3.1.23",
     "babel-loader": "^5.3.1",
+    "chai": "^3.0.0",
     "eslint": "^0.24.1",
     "eslint-plugin-react": "^2.7.0",
     "express": "^4.13.1",
@@ -44,7 +46,14 @@
     "gulp-replace": "^0.5.3",
     "gulp-uglify": "^1.2.0",
     "gulp-webpack": "^1.5.0",
+    "karma": "^0.12.37",
+    "karma-chai": "^0.1.0",
+    "karma-chrome-launcher": "^0.2.0",
+    "karma-mocha": "^0.2.0",
+    "karma-webpack": "^1.5.1",
+    "mocha": "^2.2.5",
     "node-libs-browser": "^0.5.2",
+    "sinon": "^1.15.4",
     "webpack": "^1.10.1"
   },
   "dependencies": {
