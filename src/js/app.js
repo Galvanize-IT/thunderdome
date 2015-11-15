@@ -1,11 +1,9 @@
 var HelloMessage = React.createClass({
   render: function() {
-    return <div>Hello {this.props.name}</div>;
+    return <h1>Hello, {this.props.name}!</h1>;
   }
 });
 
-ReactDOM.render(<HelloMessage name="React" />, $('body')[0]);
-
 $(function() {
-  console.log('js environment loaded?');
+  ReactDOM.render(<HelloMessage name="React" />, $('body')[0]);
 });
