@@ -38,7 +38,8 @@ var DEPENDENCIES = [
   './node_modules/bootstrap/dist/js/bootstrap.min.js',
   './node_modules/underscore/underscore-min.js',
   './node_modules/backbone/backbone-min.js',
-  './node_modules/react/dist/react.min.js'
+  './node_modules/react/dist/react.min.js',
+  './node_modules/react-dom/dist/react-dom.min.js'
 ];
 
 // Export the dependencies for testing

@@ -1,7 +1,13 @@
 var path = require('path');
 
 module.exports = {
-  entry: './src/js/app.js',
+  entry: [
+    // Set up an ES6-ish environment
+    'babel-polyfill',
+
+    // Actual application code
+    './src/js/app.js',
+  ],
   output: {
     path: path.join(__dirname, './static/js'),
     fileName: '[name].js'
@@ -11,7 +17,10 @@ module.exports = {
       {
         test: /\.js(x)?$/,
         exclude: /node_modules/,
-        loader: 'babel-loader'
+        loader: 'babel-loader',
+        // query: {
+        //   presets: ['es2015']
+        // }
       }
     ],
   }
